@@ -1,0 +1,37 @@
+.img-style-paralax
+{
+	top:0%;
+	left:0%;
+	height:100%;
+	width:100%;
+	position:absolute;
+	z-index:-1;
+}
+
+.register_div
+{
+	margin-top:100px;
+	min-height:300px;
+	background-color:#101010;
+	padding:15px;
+}
+
+.register_div h3
+{
+	color:#FFFFFF;
+}
+
+.register_div p
+{
+	color:#FFFFFF;
+}
+
+.register_div_next
+{
+	margin-top:100px;
+	min-height:200px;
+	background-color:#FE9A2E;
+	padding:10px;
+	opacity:0.9;
+	border-radius:0px 0px 100px 0px;
+}

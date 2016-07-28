@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block login %}
+
+	<form class="navbar-form" action="{{ path('user_login_check') }}" method="post">
+	    <div class="form-group">
+	      <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+	      <input type="text" id="username" name="_username" required="required" />
+	      <input type="password" id="password" name="_password" required="required" />
+	      <input type="hidden" id="remember_me" name="_remember_me" value="on" />
+	    </div>
+	    <button type="submit" id="_submit" name="_submit" class="btn btn-warning" style="color:#000000;">Se connecter</button>
+	</form>
+{% endblock %}
+
+{% block body %}
+
+	<img src="{{ asset('img/accueil.jpg') }}" class="img-style-paralax">
+
+	<div class="col-md-5 col-md-offset-1 col-xs-12 register_div">
+		<div class="col-md-12">
+			<h3 style="color:#FE9A2E;"><span class="glyphicon glyphicon-user"></span> S'enregistrer</h3>
+			<hr>
+		</div>
+		{{ form_start(form, {'method': 'post', 'action': path('user_register'), 'attr': {'class': 'fos_user_registration_register'}}) }}
+			<div class="col-md-12">
+				<div class="col-md-4">
+					<p><span class="glyphicon glyphicon-user"></span> Username : </p>
+				</div>
+				<div class="col-md-8">
+					{{ form_widget(form.username) }}
+					{{ form_errors(form.username) }}
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="col-md-4">
+					<p><span class="glyphicon glyphicon-envelope"></span> Adresse E-mail : </p>
+				</div>
+				<div class="col-md-8">
+					{{ form_widget(form.email) }}
+					{{ form_errors(form.email) }}
+				</div>
+			</div>
+			<div class="col-md-12">
+				<br></br>
+				<div class="col-md-4">
+					<p><span class="glyphicon glyphicon-lock"></span> Mot de pass : </p>
+				</div>
+				<div class="col-md-8">
+					{{ form_widget(form.plainPassword.first) }}
+					{{ form_errors(form.plainPassword.first) }}
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="col-md-4">
+					<p><span class="glyphicon glyphicon-lock"></span> Confirmation : </p>
+				</div>
+				<div class="col-md-8">
+					{{ form_widget(form.plainPassword.second) }}
+					{{ form_errors(form.plainPassword.second) }}
+				</div>
+			</div>
+			<div class="col-md-12">
+				<br></br>
+				<div class="col-md-12">
+					<input class="pull-right btn btn-warning" style="color:#000000;" type="submit" value="Valider">
+				</div>
+			</div>
+		{{ form_end(form) }}
+	</div>
+	<div class="col-md-3 col-xs-12 register_div_next">
+		<div class="col-md-12">
+			<h3 style="color:#FFFFFF;">- Rejoignez les lycceurs !</h3>
+			<h3 style="color:#FFFFFF;">- Défiez vos amis !</h3>
+			<h3 style="color:#FFFFFF;">- Ajouter du succès dans votre vie !</h3>
+		</div>
+	</div>
+
+{% endblock %}
