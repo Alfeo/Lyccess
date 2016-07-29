@@ -2,7 +2,11 @@
 
 {% block body %}
 
-	<a style="cursor:pointer;" data-toggle="modal" data-target="#myModal2"><img src="{{ asset('uploads/cover/' ~ infouser.cover ~ '') }}" class="img-style-paralax"></a>
+	{% if infouser.cover == null %}
+		<a style="cursor:pointer;" data-toggle="modal" data-target="#myModal2"><img src="{{ asset('img/default.jpg') }}" class="img-style-paralax"></a>
+	{% else %}
+		<a style="cursor:pointer;" data-toggle="modal" data-target="#myModal2"><img src="{{ asset('uploads/cover/' ~ infouser.cover ~ '') }}" class="img-style-paralax"></a>
+	{% endif %}
 	
 	<div class="col-md-4 pre-dashboard">
 		<div class="col-md-4 col-xs-4 ico-dashboard">
@@ -11,7 +15,11 @@
 			<h3><strong><span class="glyphicon glyphicon-user"></span> 0</strong></h3>
 		</div>
 		<div class="col-md-8 col-xs-4">
-			<a style="cursor:pointer;" data-toggle="modal" data-target="#myModal1"><img src="{{ asset('uploads/avatar/' ~ infouser.avatar ~ '') }}" class="img-style-avatar"></a>
+			{% if infouser.cover == null %}
+				<a style="cursor:pointer;" data-toggle="modal" data-target="#myModal1"><img src="{{ asset('img/default.jpg') }}" class="img-style-avatar"></a>
+			{% else %}
+				<a style="cursor:pointer;" data-toggle="modal" data-target="#myModal1"><img src="{{ asset('uploads/avatar/' ~ infouser.avatar ~ '') }}" class="img-style-avatar"></a>
+			{% endif %}
 		</div>
 	</div>
 
@@ -30,7 +38,12 @@
 	      </div>
 	      {{ form_start(dataform, {'method': 'post', 'action': path('user_dashboard')}) }}
 		      <div class="modal-body" style="text-align:center;">
-		        <img src="{{ asset('uploads/avatar/' ~ infouser.avatar ~ '') }}" class="img-style-modal">
+		      	{% if infouser.cover == null %}
+					<img src="{{ asset('img/default.jpg') }}" class="img-style-paralax">
+				{% else %}
+					<img src="{{ asset('uploads/avatar/' ~ infouser.avatar ~ '') }}" class="img-style-modal">
+				{% endif %}
+		        
 		        {{ form_widget(dataform.avatar) }}
 		      </div>
 		      <div class="modal-footer">
@@ -48,7 +61,11 @@
 	        <h4 class="modal-title" id="myModalLabel">Photo de couverture</h4>
 	      </div>
 		      <div class="modal-body" style="text-align:center;">
-		        <img src="{{ asset('uploads/avatar/' ~ infouser.cover ~ '') }}" class="img-style-modal">
+		        {% if infouser.cover == null %}
+					<img src="{{ asset('img/default.jpg') }}" class="img-style-paralax">
+				{% else %}
+					<img src="{{ asset('uploads/cover/' ~ infouser.cover ~ '') }}" class="img-style-modal">
+				{% endif %}
 		        {{ form_widget(dataform.cover) }}
 		      </div>
 		      <div class="modal-footer">
