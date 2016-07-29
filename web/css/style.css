@@ -4,8 +4,21 @@
 	left:0%;
 	height:100%;
 	width:100%;
-	position:absolute;
+	position:fixed;
 	z-index:-1;
+}
+
+.img-style-modal
+{
+	width:100%;
+	height:auto;
+}
+
+.img-style-avatar
+{
+	height:170px;
+	width:170px;
+	border:solid #FFFFFF 5px;
 }
 
 .register_div
@@ -34,4 +47,23 @@
 	padding:10px;
 	opacity:0.9;
 	border-radius:0px 0px 100px 0px;
+}
+
+.main-dashboard
+{
+	background-color:#FFFFFF;
+	height:500px;
+}
+
+.pre-dashboard
+{
+	margin-top:100px;
+	height:200px;
+}
+
+.ico-dashboard
+{
+	background-color:#FE9A2E;
+	height:170px;
+	opacity:0.8;
 }

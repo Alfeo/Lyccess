@@ -25,7 +25,20 @@
 
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
               <ul class="nav navbar-nav navbar-right">
-                {% block login %}{% endblock %}
+                {% if is_granted("IS_AUTHENTICATED_REMEMBERED") %}                      
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Bonjour {{ app.user.username }} <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="{{ path('user_dashboard') }}"><span class="glyphicon glyphicon-user"></span> Mon Profil</a></li>
+                      <li><a href="#"><span class="glyphicon glyphicon-cog"></span> Mes paramètres</a></li>
+                      <li><a href="#"><span class="glyphicon glyphicon-envelope"></span> Messagerie</a></li>
+                      <li role="separator" class="divider"></li>
+                      <li><a href="{{ path('fos_user_security_logout') }}"><span class="glyphicon glyphicon-log-out"></span> Se déconnecter</a></li>
+                    </ul>
+                  </li>
+                {% else %}
+                  {% block login %}{% endblock %}
+                {% endif %}
               </ul>
             </div><!-- /.navbar-collapse -->
           </div><!-- /.container-fluid -->
