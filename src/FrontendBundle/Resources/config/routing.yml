@@ -5,3 +5,7 @@ frontend_homepage:
 user_dashboard:
     path:     /user/dashboard
     defaults: { _controller: FrontendBundle:Info:Dashboard }
+
+new_actu:
+    path:     /user/new/actu
+    defaults: { _controller: FrontendBundle:Info:newActu }

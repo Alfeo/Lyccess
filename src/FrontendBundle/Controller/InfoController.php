@@ -3,7 +3,9 @@
 namespace FrontendBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use FrontendBundle\Entity\Actu;
 
 class InfoController extends Controller
 {
@@ -53,10 +55,48 @@ class InfoController extends Controller
             $em->flush();
         }
 
+        $tabActu = [];
+
+        $allActu = $em->getRepository('FrontendBundle:Actu')->findAll();
+        foreach ($allActu as $actu)
+        {
+            $thisUserFull = $em->getRepository('AppBundle:User')->findOneById($actu->getAuteur());
+            $thisDatauser = $em->getRepository('FrontendBundle:Datauser')->findOneByUser($actu->getAuteur());
+
+            $tabActu[] = array(
+                'username' => $thisUserFull->getUsername(),
+                'message' => $actu->getMessage(),  
+                'avatar' => $thisDatauser->getAvatar(),  
+            );
+        }
+
         return $this->render('FrontendBundle:Default:dashboard.html.twig', array(
             'user' => $user,
             'infouser' => $thisUser,
             'dataform' => $dataform->createView(),
+            'allActu' => array_reverse($tabActu),
         ));
+    }
+
+    public function newActuAction(Request $request)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $this->container->get('security.context')->getToken()->getUser();
+
+        $message = $request->request->get('message');
+
+        $actu = new Actu();
+        $actu->setAuteur($user->getId());
+        $actu->setMessage($message);
+        $actu->setType(1);
+
+        $em->persist($actu);
+        $em->flush();
+
+        $url = $this->generateUrl('user_dashboard');
+        $response = new RedirectResponse($url);
+
+        return $response;
     }
 }
