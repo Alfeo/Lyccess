@@ -154,3 +154,60 @@
 	min-height:400px;
 	max-height:400px;
 }
+
+.challenge-pre
+{
+	min-height:50px;
+	background-color:#101010;
+	margin-top:100px;
+	box-shadow: 0px 10px 5px 0px #000000;
+	padding:10px;
+}
+
+.challenge-main
+{
+	height:500px;
+	overflow-y:scroll;
+	background-color:#666;
+	box-shadow: 0px 10px 5px 0px #000000;
+	border:solid #101010 5px;
+}
+
+.card
+{
+	min-height:50px;
+	background-color:#FFFFFF;
+	padding:10px;
+	margin-top:10px;
+	border-radius:5px;
+}
+
+.rounded_cat
+{
+	height:30px;
+	border:solid #000000 2px;
+	border-radius:100px;
+	width:30px;
+}
+
+.card p
+{
+	margin-top:5px;
+}
+
+.center
+{
+	text-align:center;
+}
+
+.left
+{
+	text-align:left;
+}
+
+.detail-card
+{
+	background-color:#D8D8D8;
+	margin-top:10px;
+	padding:10px;
+}

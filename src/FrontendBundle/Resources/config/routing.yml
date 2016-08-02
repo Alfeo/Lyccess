@@ -9,3 +9,11 @@ user_dashboard:
 new_actu:
     path:     /user/new/actu
     defaults: { _controller: FrontendBundle:Info:newActu }
+
+index_challenge:
+    path:     /challenge
+    defaults: { _controller: FrontendBundle:Default:challenge }
+
+challenge_new:
+    path:     /challenge/new
+    defaults: { _controller: FrontendBundle:Default:addChallenge }

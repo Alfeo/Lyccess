@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<a style="cursor:pointer;" data-toggle="modal" data-target="#myModal2"><img src="{{ asset('img/success.jpg') }}" class="img-style-paralax"></a>
+
+<div class="col-md-10 col-md-offset-1">
+
+	<div class="col-md-12 challenge-pre">
+
+		<button type="button" class="btn btn-default" data-toggle="modal" data-target="#challenge"><span class="glyphicon glyphicon-plus"></span> Créer un challenge</bouton>
+
+	</div>
+	<div class="col-md-12 challenge-main">
+		{% set compteur = 0 %}
+
+		{% for challenge in challenges %}
+
+		<div class="col-md-12 card">
+			<div class="col-md-1 center">
+
+				{% if challenge.category == 1 %}
+					<div class="rounded_cat" style="background-color:#FE9A2E"></div>
+				{% elseif challenge.category == 2 %}
+					<div class="rounded_cat" style="background-color:#2EFE2E"></div>
+				{% elseif challenge.category == 3 %}
+					<div class="rounded_cat" style="background-color:#642EFE"></div>
+				{% endif %}
+			</div>
+			<div class="col-md-5 left">
+				<p>{{ challenge.name }}</p>
+			</div>
+			<div class="col-md-3 center">
+				<p>{{ challenge.reward }}</p>
+			</div>
+			<div class="col-md-2 col-md-offset-1 center">
+				<button data-toggle="collapse" data-target="#detail{{ compteur}}"><span class="glyphicon glyphicon-plus"></span> Détails</button>
+			</div>
+			<div id="detail{{ compteur}}" class="collapse col-md-12 detail-card">
+				<p>{{ challenge.description }}</p>
+			</div>
+
+			{% set compteur = compteur + 1 %}
+		</div>
+
+		{% endfor %}
+
+	</div>
+
+</div>
+
+<div class="modal fade" id="challenge" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Nouveau challenge</h4>
+      </div>
+      <form method="POST" action="{{ path('challenge_new') }}">
+	      <div class="modal-body">
+	      	<p>Category</p>
+	        <p>
+	        	<select name="category">
+	        		<option value="1">Social</option>
+	        		<option value="2">Exploration</option>
+	        		<option value="3">Divertissement</option>
+	        	</select>
+	        </p>
+	      	<p>Nom du challenge</p>
+	        <p><input type="text" name="name" maxlength="25"></p>
+	      	<p>Description</p>
+	        <p><textarea name="description"></textarea></p>
+	      	<p>Récompense</p>
+	        <p><input type="number" name="reward"></p>
+	        <input type="hidden" name="iduser" value="{{ user.id }}">
+	      </div>
+	      <div class="modal-footer">
+	        <input type="submit" class="btn btn-warning" value="Enregistrer">
+	      </div>
+  	  </form>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+{% endblock %}

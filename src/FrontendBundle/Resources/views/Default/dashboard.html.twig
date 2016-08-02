@@ -2,13 +2,13 @@
 
 {% block body %}
 
-<div class="col-md-10 col-md-offset-1">
+{% if infouser.cover == null %}
+	<a style="cursor:pointer;" data-toggle="modal" data-target="#myModal2"><img src="{{ asset('img/default.jpg') }}" class="img-style-paralax"></a>
+{% else %}
+	<a style="cursor:pointer;" data-toggle="modal" data-target="#myModal2"><img src="{{ asset('uploads/cover/' ~ infouser.cover ~ '') }}" class="img-style-paralax"></a>
+{% endif %}
 
-	{% if infouser.cover == null %}
-		<a style="cursor:pointer;" data-toggle="modal" data-target="#myModal2"><img src="{{ asset('img/default.jpg') }}" class="img-style-paralax"></a>
-	{% else %}
-		<a style="cursor:pointer;" data-toggle="modal" data-target="#myModal2"><img src="{{ asset('uploads/cover/' ~ infouser.cover ~ '') }}" class="img-style-paralax"></a>
-	{% endif %}
+<div class="col-md-10 col-md-offset-1">
 	
 	<div class="col-md-4 row pre-dashboard">
 		<div class="col-md-4 col-xs-4 ico-dashboard">
