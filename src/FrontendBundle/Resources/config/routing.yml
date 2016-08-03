@@ -17,3 +17,7 @@ index_challenge:
 challenge_new:
     path:     /challenge/new
     defaults: { _controller: FrontendBundle:Default:addChallenge }
+
+user_show_dashboard:
+    path:     /user/dashboard/show/{id}
+    defaults: { _controller: FrontendBundle:Info:showUser }

@@ -57,7 +57,7 @@ class InfoController extends Controller
 
         $tabActu = [];
 
-        $allActu = $em->getRepository('FrontendBundle:Actu')->findAll();
+        $allActu = $em->getRepository('FrontendBundle:Actu')->findByAuteur($user->getId());
         foreach ($allActu as $actu)
         {
             $thisUserFull = $em->getRepository('AppBundle:User')->findOneById($actu->getAuteur());
@@ -98,5 +98,43 @@ class InfoController extends Controller
         $response = new RedirectResponse($url);
 
         return $response;
+    }
+
+    public function showUserAction($id)
+    {
+        $em = $this->getDoctrine()->getManager();
+
+        $user = $this->container->get('security.context')->getToken()->getUser();
+
+        if ($id == $user->getId())
+        {
+            $url = $this->generateUrl('user_dashboard');
+            $response = new RedirectResponse($url);
+
+            return $response;
+        }
+
+        $thisUser = $em->getRepository('FrontendBundle:Datauser')->findOneByUser($id);
+
+        $tabActu = [];
+
+        $allActu = $em->getRepository('FrontendBundle:Actu')->findByAuteur($id);
+        foreach ($allActu as $actu)
+        {
+            $thisUserFull = $em->getRepository('AppBundle:User')->findOneById($actu->getAuteur());
+            $thisDatauser = $em->getRepository('FrontendBundle:Datauser')->findOneByUser($actu->getAuteur());
+
+            $tabActu[] = array(
+                'username' => $thisUserFull->getUsername(),
+                'message' => $actu->getMessage(),  
+                'avatar' => $thisDatauser->getAvatar(),  
+            );
+        }
+
+        return $this->render('FrontendBundle:Default:showuser.html.twig', array(
+            'user' => $user,
+            'infouser' => $thisUser,
+            'allActu' => array_reverse($tabActu),
+        ));
     }
 }
